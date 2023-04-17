@@ -23,10 +23,49 @@ Given('the header includes the registered trademark symbol after FHIR') do
     expect(page_content).to eq(expected_content)
 end
 
-Then('the footer contains a link to the ADHA privacy policy') do
-  pending # Write code here that turns the phrase above into concrete actions
+Then('the body contains {string} as h1 style') do |content|
+    expected_content = content
+    xpath = "//div[@class='App au-grid']/main/div[2]/div/div/div/h1"
+    page_content = get_element_text_by_xpath(xpath)
+    # Kernel.puts page_content
+    expect(page_content).to eq(expected_content)
 end
 
-Then('the footer contains a link to the ADHA Terms of Use') do
-  pending # Write code here that turns the phrase above into concrete actions
+Then('body link {int} has text {string}') do |link_number, link_text|
+    expected_link_text = link_text
+    xpath = "//div[@class='App au-grid']/main/div[2]/div/div/div/ul/li[#{link_number}]/a"
+    actual_link_text = get_element_text_by_xpath(xpath)
+    expect(actual_link_text).to eq(expected_link_text)
+end
+
+Then('body link {int} has url {string}') do |link_number, url|
+    expected_link_url = url
+    xpath = "//div[@class='App au-grid']/main/div[2]/div/div/div/ul/li[#{link_number}]/a"
+    actual_link_url = @driver.find_element(xpath: xpath).attribute("href")
+    # Kernel.puts actual_link_url
+    expect(actual_link_url).to eq(expected_link_url)
+end
+
+Then('footer link {int} has text {string}') do |link_number, link_text|
+    expected_link_text = link_text
+    xpath = "//footer/div/nav/ul/li[#{link_number}]/a"
+    actual_link_text = get_element_text_by_xpath(xpath)
+    # Kernel.puts actual_link_text
+    expect(actual_link_text).to eq(expected_link_text)
+end
+
+Then('footer link {int} has url {string}') do |link_number, url|
+    expected_link_url = url
+    xpath = "//footer/div/nav/ul/li[#{link_number}]/a"
+    actual_link_url = @driver.find_element(xpath: xpath).attribute("href")
+    # Kernel.puts actual_link_url
+    expect(actual_link_url).to eq(expected_link_url)
+end
+
+Then('the footer contains {string}') do |content|
+    expected_content = content
+    xpath = "//div[@class='au-footer__end ']"
+    page_content = get_element_text_by_xpath(xpath)
+    # Kernel.puts page_content
+    expect(page_content).to eq(expected_content)
 end

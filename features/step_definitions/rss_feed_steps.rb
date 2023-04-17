@@ -1,8 +1,4 @@
 
-Before do
-  @driver = Selenium::WebDriver.for :firefox
-end
-
 Given('the FHIR IG landing page has a RSS feed file') do
   @driver.get "https://fhir.digitalhealth.gov.au/package-feed.xml"
 end
@@ -21,8 +17,4 @@ end
 Then('there are a total of exactly {int} item nodes') do |int|
   xpath = "/rss/channel/item[#{int + 1}]"
   expect { @driver.find_element(xpath: xpath) }.to raise_error(Selenium::WebDriver::Error::NoSuchElementError)
-end
-
-After do
-  @driver.quit
 end

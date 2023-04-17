@@ -46,6 +46,13 @@ Then('body link {int} has url {string}') do |link_number, url|
     expect(actual_link_url).to eq(expected_link_url)
 end
 
+Then('it resolves to an IG page with the title {string}') do |expected_title|
+    xpath = "//div[@id='ig-status']"
+    actual_title = get_element_text_by_xpath(xpath)
+    # Kernel.puts actual_title
+    expect(actual_title).to eq(expected_title)
+end
+
 Then('footer link {int} has text {string}') do |link_number, link_text|
     expected_link_text = link_text
     xpath = "//footer/div/nav/ul/li[#{link_number}]/a"

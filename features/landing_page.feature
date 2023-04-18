@@ -38,5 +38,5 @@ Feature: ADHA FHIR IG landing page
     And footer link 2 has url "https://www.digitalhealth.gov.au/about-us/policies-privacy-and-reporting/terms-of-use"
     And the web endpoint "https://www.digitalhealth.gov.au/about-us/policies-privacy-and-reporting/terms-of-use" resolves
 
-Scenario: Footer copyright statement
+  Scenario: Footer copyright statement
     Then the footer contains "©2023 Australian Digital Health Agency"

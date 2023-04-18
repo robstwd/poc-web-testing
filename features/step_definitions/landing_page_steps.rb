@@ -69,6 +69,14 @@ Then('footer link {int} has url {string}') do |link_number, url|
     expect(actual_link_url).to eq(expected_link_url)
 end
 
+Then('when body link {int} is clicked, it resolves to {string}') do |link_number, resolved_url|
+    expected_resolved_link_url = resolved_url
+    xpath = "//div[@class='App au-grid']/main/div[2]/div/div/div/ul/li[#{link_number}]/a"
+    link_text = get_element_text_by_xpath(xpath)
+    @driver.find_element(link_text: link_text).click
+    # Kernel.puts @driver.current_url
+    expect(@driver.current_url).to eq(expected_resolved_link_url)  
+end
 Then('the footer contains {string}') do |content|
     expected_content = content
     xpath = "//div[@class='au-footer__end ']"

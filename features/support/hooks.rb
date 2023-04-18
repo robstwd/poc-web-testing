@@ -1,5 +1,6 @@
 Before do
-  @driver = Selenium::WebDriver.for :firefox
+  options = Selenium::WebDriver::Firefox::Options.new(args: ['-headless'])
+  @driver = Selenium::WebDriver.for(:firefox, options: options)
 end
 
 After do

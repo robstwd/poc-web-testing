@@ -1,0 +1,31 @@
+name: Automatic cucumber tests
+
+on: [push, pull_request]
+
+permissions:
+  checks: write
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: 3.2.1
+
+    - name: Get dependencies
+      run: bundle install
+
+    - name: Run tests
+      run: cucumber features --format junit --out test-results
+
+    - name: Publish test results
+      uses: EnricoMi/publish-unit-test-result-action@v2
+      if: always()
+      with:
+        junit_files: test-results/*.xml
